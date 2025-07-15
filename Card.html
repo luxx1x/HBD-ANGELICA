@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy Birthday!</title>
+    <link rel="stylesheet" href="card.css">
+</head>
+<body>
+
+    <audio id="bg-music" src="happy-birthday-to-you-370804.mp3" autoplay loop hidden></audio>
+
+
+    <style>
+    .confetti-emoji {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        font-size: 2em;
+        opacity: 0;
+        pointer-events: none;
+        animation: confetti-fly 1s ease-out forwards;
+    }
+    @keyframes confetti-fly {
+        0% {
+            transform: translate(-50%, 0) scale(1) rotate(0deg);
+            opacity: 1;
+        }
+        80% {
+            opacity: 1;
+        }
+        100% {
+            transform: translate(-50%, -120px) scale(1.5) rotate(360deg);
+            opacity: 0;
+        }
+    }
+    </style>
+    <!-- Confetti emoji container (will be filled by JS) -->
+    <script>
+    // Confetti emoji list
+    const confettiEmojis = ['🎉','🎊','✨','🥳','🎈','💥'];
+
+    function flyConfetti(btn) {
+        for (let i = 0; i < 10; i++) {
+            const emoji = confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
+            const span = document.createElement('span');
+            span.className = 'confetti-emoji';
+            span.textContent = emoji;
+            // Random horizontal offset
+            span.style.left = (50 + Math.random()*40 - 20) + '%';
+            // Random animation duration
+            span.style.animationDuration = (0.8 + Math.random()*0.7) + 's';
+            btn.appendChild(span);
+            // Remove after animation
+            span.addEventListener('animationend', () => span.remove());
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const nextBtn = document.querySelector('.next-button');
+        nextBtn.addEventListener('click', function(e) {
+            flyConfetti(nextBtn);
+        });
+    });
+    </script>
+
+<div class="card-container">
+</div>
+
+   <div class="card">
+        <div class="card-page card-front">
+            <h1 class="card-title">Happy Birthday!</h1>
+            <div class="container">
+            <img src="photo_2025-05-27_19-48-56.jpg" alt="Birthday Image" class="birthday-image">
+            </div>
+        </div>
+     
+        <div class="card-page card-inside">
+            <div class="message">
+                Dahil boring ako, nag code ako ng card HAHAHAHAHAHAH. Happy Birthday ulit!!
+            </div>
+            <div class="signature">— From Str.jjfrsn</div>
+        </div>
+        <button class="next-button" style="display:block; margin: 20px auto; padding: 12px 32px; font-size: 1.2em; background: linear-gradient(90deg, #ffb347, #ffcc33); border: none; border-radius: 25px; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer; position: relative; overflow: hidden; transition: background 0.3s;">
+            Next
+            <span class="confetti"></span>
+        </button>
+        <script>
+            document.querySelector('.next-button').onclick = function() {
+                window.location.href = 'next.html';
+            };
+
+        </script>
+   
+
+<script>
+      const audio = document.getElementById('bg-music');
+    audio.volume = 1.0;
+
+    // Try to autoplay when page loads
+    window.addEventListener('DOMContentLoaded', () => {
+        audio.play().catch(() => {
+            // Autoplay might be blocked; show a play button
+            const playBtn = document.createElement('button');
+            playBtn.textContent = 'Play Music';
+            playBtn.style.position = 'fixed';
+            playBtn.style.top = '20px';
+            playBtn.style.right = '20px';
+            playBtn.style.zIndex = '1000';
+            document.body.appendChild(playBtn);
+
+            playBtn.addEventListener('click', () => {
+                audio.play();
+                playBtn.remove();
+            });
+        });
+    });
+</script>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy Birthday!</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+    <audio id="bg-music" src="happy-birthday-to-you-370804.mp3" autoplay loop hidden></audio>
+
+    <div class="flashing">Happy Birthday!</div>
+    <canvas id="confetti-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:999;"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<a id="CLICK" href="Card.html">CLICK!</a>
+
+<script>
+    const audio = document.getElementById('bg-music');
+    audio.volume = 1.0;
+
+    // Try to autoplay when page loads
+    window.addEventListener('DOMContentLoaded', () => {
+        audio.play().catch(() => {
+            // Autoplay might be blocked; show a play button
+            const playBtn = document.createElement('button');
+            playBtn.textContent = 'Play Music';
+            playBtn.style.position = 'fixed';
+            playBtn.style.top = '20px';
+            playBtn.style.right = '20px';
+            playBtn.style.zIndex = '1000';
+            document.body.appendChild(playBtn);
+
+            playBtn.addEventListener('click', () => {
+                audio.play();
+                playBtn.remove();
+            });
+        });
+    });
+
+    // Confetti effect
+    const canvas = document.getElementById('confetti-canvas');
+    const confetti = window.confetti.create(canvas, { resize: true, useWorker: true });
+
+    function startConfetti() {
+        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+    }
+
+    startConfetti();
+</script>
+</body>
+</html>

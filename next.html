@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy Birthday!</title>
+    <link rel="stylesheet" href="card.css">
+</head>
+<body>
+
+    <audio id="bg-music" src="happy-birthday-to-you-370804.mp3" autoplay loop hidden></audio>
+
+<div class="card-container">
+</div>
+
+   <div class="card">
+        <div class="card-page card-front">
+            <h1 class="card-title">Happy Birthday!</h1>
+            <div class="container">
+            <img src="photo_2025-05-27_19-48-56.jpg" alt="Birthday Image" class="birthday-image">
+            </div>
+        </div>
+     
+        <div class="card-page card-inside">
+            <div class="message">
+                Wishing you a day filled with love, joy, and all your favorite things!<br><br>
+                "This is the day that the Lord has made; let us rejoice and be glad in it." — Psalm 118:24
+            </div>
+            <div class="signature">— From Str.jjfrsn</div>
+        </div>
+    </div>
+
+<script>
+    const audio = document.getElementById('bg-music');
+    audio.volume = 1.0;
+
+    // Try to autoplay when page loads
+    window.addEventListener('DOMContentLoaded', () => {
+        audio.play().catch(() => {
+            // Autoplay might be blocked; show a play button
+            const playBtn = document.createElement('button');
+            playBtn.textContent = 'Play Music';
+            playBtn.style.position = 'fixed';
+            playBtn.style.top = '20px';
+            playBtn.style.right = '20px';
+            playBtn.style.zIndex = '1000';
+            document.body.appendChild(playBtn);
+
+            playBtn.addEventListener('click', () => {
+                audio.play();
+                playBtn.remove();
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
